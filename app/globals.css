@@ -498,3 +498,8 @@ nav {
     0%, 100% { opacity: 0.2; }
     50% { opacity: 1; filter: drop-shadow(0 0 5px #fff); }
 }
+
+/* Hide Next.js Dev Overlay */
+nextjs-portal {
+    display: none !important;
+}
