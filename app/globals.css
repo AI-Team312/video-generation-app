@@ -67,15 +67,6 @@ nav {
     gap: 0.5rem;
 }
 
-.logo::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 24px;
-    background: var(--premium-gradient);
-    border-radius: 6px;
-    box-shadow: 0 0 15px var(--accent-1);
-}
 
 .nav-links {
     display: flex;
