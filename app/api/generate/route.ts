@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import Replicate from 'replicate';
 import { auth } from '@clerk/nextjs/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: Request) {
   try {
     // 1. Authenticate User
