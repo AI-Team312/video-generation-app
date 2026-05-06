@@ -11,19 +11,19 @@ const PLANS = {
   starter: {
     name: 'Starter',
     price: 499, // $4.99 in cents
-    credits: 30,
-    priceId: 'price_starter', // Will be replaced with real Stripe Price ID
+    credits: 50,
+    priceId: 'price_starter',
   },
   pro: {
     name: 'Pro',
-    price: 1199, // $11.99 in cents
-    credits: 90,
+    price: 1499, // $14.99 in cents
+    credits: 150,
     priceId: 'price_pro',
   },
   elite: {
     name: 'Elite',
-    price: 2499, // $24.99 in cents
-    credits: 180,
+    price: 2999, // $29.99 in cents
+    credits: 350,
     priceId: 'price_elite',
   },
 };

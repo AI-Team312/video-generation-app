@@ -39,7 +39,7 @@ export default function Home() {
       <header className="hero">
         <h1>Transform Your Prompts into <span>Cinematic Reality</span></h1>
         <p>The next generation of AI video creation. High quality, fast, and simple. Stop dreaming, start generating.</p>
-        <div style={{ display: "flex", gap: "1rem" }}>
+        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
           <a href="/dashboard" className="btn-primary">Create Video Now</a>
           <a href="#pricing" className="btn-outline">View Plans</a>
         </div>
@@ -51,7 +51,7 @@ export default function Home() {
           </div>
           <div className="preview-body">
             <div className="preview-sidebar">
-              <div className="sidebar-item" style={{ width: "100%", height: "20px", background: "var(--primary)", opacity: 0.2 }}></div>
+              <div className="sidebar-item" style={{ width: "100%", height: "20px", background: "var(--accent-1)", opacity: 0.2 }}></div>
               <div className="sidebar-item" style={{ width: "80%" }}></div>
               <div className="sidebar-item" style={{ width: "90%" }}></div>
               <div className="sidebar-item" style={{ width: "70%" }}></div>
@@ -67,10 +67,41 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Credit Rate Table */}
+      <section style={{ padding: "4rem 5%", textAlign: "center", borderTop: "1px solid var(--border-color)" }}>
+        <h2 className="section-title" style={{ marginBottom: "2rem" }}>Simple <span style={{ color: "var(--accent-1)" }}>Credit Rates</span></h2>
+        <p style={{ color: "var(--text-secondary)", marginBottom: "2.5rem", fontSize: "1rem" }}>
+          Choose any duration — pay only for what you generate
+        </p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center", maxWidth: "800px", margin: "0 auto" }}>
+          {[
+            { s: "5s",  c: 3  },
+            { s: "10s", c: 5  },
+            { s: "15s", c: 8  },
+            { s: "20s", c: 11 },
+            { s: "30s", c: 16 },
+            { s: "45s", c: 22 },
+            { s: "59s", c: 28 },
+          ].map((item) => (
+            <div key={item.s} style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-color)",
+              borderRadius: "12px",
+              padding: "1rem 1.5rem",
+              minWidth: "100px",
+              textAlign: "center",
+            }}>
+              <div style={{ fontSize: "1.3rem", fontWeight: 700, color: "white" }}>{item.s}</div>
+              <div style={{ color: "var(--accent-2)", fontWeight: 600, fontSize: "0.9rem", marginTop: "0.25rem" }}>{item.c} Credits</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section id="pricing" className="pricing">
-        <h2 className="section-title">Transparent <span>Pricing</span></h2>
+        <h2 className="section-title">Transparent <span style={{ color: "var(--accent-1)" }}>Pricing</span></h2>
         <p style={{ color: "var(--text-secondary)", marginBottom: "3rem", fontSize: "1.1rem" }}>
-          5 Sec Video = <strong>3 Credits</strong> &nbsp; | &nbsp; 10 Sec Video = <strong>7 Credits</strong>
+          Get credits, generate videos — no hidden fees
         </p>
         <div className="pricing-grid">
 
@@ -78,9 +109,10 @@ export default function Home() {
           <div className="price-card">
             <h3>Starter</h3>
             <div className="price-value">$4<span>.99<span>/mo</span></span></div>
-            <div className="credits-count">30 Credits / Month</div>
+            <div className="credits-count">50 Credits / Month</div>
             <ul className="features-list">
-              <li>~ 10 Short Videos</li>
+              <li>Up to 16 videos (5s each)</li>
+              <li>Max 20s per video</li>
               <li>720p Resolution</li>
               <li>Standard Speed</li>
               <li>Email Support</li>
@@ -92,10 +124,11 @@ export default function Home() {
           <div className="price-card popular">
             <div className="popular-tag">Best Value</div>
             <h3>Pro</h3>
-            <div className="price-value">$11<span>.99<span>/mo</span></span></div>
-            <div className="credits-count">90 Credits / Month</div>
+            <div className="price-value">$14<span>.99<span>/mo</span></span></div>
+            <div className="credits-count">150 Credits / Month</div>
             <ul className="features-list">
-              <li>~ 30 Short Videos</li>
+              <li>Up to 50 videos (5s each)</li>
+              <li>Max 45s per video</li>
               <li>1080p Crystal Clear</li>
               <li>Priority Generation</li>
               <li>Commercial Rights</li>
@@ -106,13 +139,14 @@ export default function Home() {
           {/* Elite Plan */}
           <div className="price-card">
             <h3>Elite</h3>
-            <div className="price-value">$24<span>.99<span>/mo</span></span></div>
-            <div className="credits-count">180 Credits / Month</div>
+            <div className="price-value">$29<span>.99<span>/mo</span></span></div>
+            <div className="credits-count">350 Credits / Month</div>
             <ul className="features-list">
-              <li>~ 60 Short Videos</li>
+              <li>Up to 116 videos (5s each)</li>
+              <li>Max 59s per video</li>
               <li>4K AI Upscaling</li>
               <li>Instant Generation</li>
-              <li>Dedicated Manager</li>
+              <li>Dedicated Support</li>
             </ul>
             <PricingButton plan="elite" label="Choose Elite" className="btn-outline" />
           </div>

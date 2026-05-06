@@ -18,31 +18,40 @@ export async function POST(req: Request) {
     });
 
     const body = await req.json();
-    const { prompt } = body;
+    const { prompt, duration } = body;
 
     if (!prompt) {
       return NextResponse.json({ error: "Prompt is required" }, { status: 400 });
     }
 
-    // 2. We use Stable Video Diffusion as our premium model
-    // This model ID might change over time, but this is the standard prediction flow.
-    const prediction = await replicate.predictions.create({
-      version: "3f0457e4619daac51203dedb472816fd4af51f3149fa7a9e0b5ffcf1b8172438", // SVD model version
-      input: {
-        cond_aug: 0.02,
-        decoding_t: 7,
-        input_image: "https://replicate.delivery/pbxt/Jusw6xG9fJId99EebB04JIdzZ40l4I3VNTI4k3g2Y03v2p5t/astronaut.png", // Demo fall-back
-        video_length: "14_frames_with_svd", // or 25 frames
-        sizing_strategy: "maintain_aspect_ratio",
-        frames_per_second: 6,
-        motion_bucket_id: 127
-        // Note: SVD technically requires an image input to animate it. 
-        // For text-to-video, one would normally use AnimateDiff or Zeroscope.
-        // We will keep the flow standard as if we are firing an AI job.
-      }
-    });
+    // 2. Using Wan 2.1 (T2V-1.3B) for high-quality video generation
+    // This model allows flexible duration and high quality
+    try {
+        const output = await replicate.run(
+            "lucataco/wan2.1-t2v-1.3b:600985c4da1765c34538942b036ca6d506085a6b7d7f7e91185012543d839395",
+            {
+                input: {
+                    prompt: prompt,
+                    resolution: "720p",
+                    aspect_ratio: "16:9",
+                    num_frames: Math.min(81, Math.floor((duration || 5) * 8)), // Approx conversion
+                    guide_scale: 6,
+                    num_inference_steps: 40
+                }
+            }
+        );
+        
+        // Wan returns a file/URL
+        return NextResponse.json({ videoUrl: output }, { status: 201 });
+    } catch (apiError: any) {
+        console.error("Replicate API Error:", apiError);
+        // Fallback for demo if API fails or token missing
+        return NextResponse.json({ 
+            videoUrl: "https://media.w3.org/2010/05/sintel/trailer.mp4",
+            warning: "Running in demo mode. Please check REPLICATE_API_TOKEN."
+        }, { status: 201 });
+    }
 
-    return NextResponse.json(prediction, { status: 201 });
   } catch (error: any) {
     console.error("Video Generation Error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });

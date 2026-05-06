@@ -438,12 +438,47 @@ nav {
     100% { transform: rotate(360deg); }
 }
 
+@media (max-width: 1024px) {
+    .hero h1 { font-size: 4rem; }
+    .pricing-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+}
+
 @media (max-width: 768px) {
-    .hero h1 { font-size: 3rem; }
+    nav { padding: 1rem 5%; }
     .nav-links { display: none; }
-    .hero { padding: 10rem 5% 4rem; }
-    .dashboard-container { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
+    .hero { padding: 8rem 5% 4rem; }
+    .hero h1 { font-size: 2.75rem; }
+    .hero p { font-size: 1.1rem; }
+    
+    .dashboard-container { 
+        grid-template-columns: 1fr; 
+        height: auto;
+    }
+    .sidebar { 
+        display: flex; 
+        flex-direction: row;
+        width: 100%;
+        padding: 1rem;
+        gap: 1rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 60px;
+        z-index: 100;
+        background: var(--bg-card);
+    }
+    .sidebar div:first-child { display: none; }
+    .sidebar-item { display: none; }
+    .main-content { padding: 2rem 5%; }
+    
+    .price-card { padding: 2.5rem 1.5rem; }
+    .price-value { font-size: 2.75rem; }
+}
+
+@media (max-width: 480px) {
+    .hero h1 { font-size: 2.25rem; }
+    .btn-primary, .btn-outline { width: 100%; text-align: center; }
+    .pricing-grid { grid-template-columns: 1fr; }
 }
 
 /* Bright & Visible Moving Sparkling Effect */
