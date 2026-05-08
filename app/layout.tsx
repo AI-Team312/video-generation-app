@@ -19,7 +19,11 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
-          <div className="sparkles-bg"></div>
+          <div className="sparkles-bg">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <nav>
               <a href="/" className="logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'white', fontWeight: 800, fontSize: '1.5rem', letterSpacing: '-1px' }}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,17 +46,26 @@ export default async function RootLayout({
                 </svg>
                 VidFlow
               </a>
+              <input type="checkbox" id="menu-toggle" style={{ display: 'none' }} />
+              <label htmlFor="menu-toggle" className="nav-toggle" style={{ display: 'none', color: 'white' }}>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              </label>
               <div className="nav-links">
-                  <a href="/#how-it-works">How it works</a>
-                  <a href="/#pricing">Pricing</a>
+                  <a href="/">Home</a>
                   <a href="/dashboard">Dashboard</a>
+                  <a href="/#pricing">Pricing</a>
+                  <a href="/how-it-works">How it works</a>
               </div>
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                 {!userId ? (
                   <SignInButton mode="modal"><button className="btn-primary" style={{ padding: "0.6rem 1.5rem", fontSize: "0.9rem" }}>Log In / Sign Up</button></SignInButton>
                 ) : (
                   <>
-                    <a href="/dashboard" className="btn-outline" style={{ padding: "0.5rem 1rem", fontSize: "0.8rem", border: "1px solid var(--accent-1)" }}>Go to Dashboard</a>
+                    <a href="/dashboard" className="btn-outline mobile-hide" style={{ padding: "0.5rem 1rem", fontSize: "0.8rem", border: "1px solid var(--accent-1)" }}>Go to Dashboard</a>
                     <UserButton />
                   </>
                 )}
@@ -61,6 +74,10 @@ export default async function RootLayout({
           {children}
           <footer style={{ padding: "4rem 10%", borderTop: "1px solid var(--border-color)", textAlign: "center", color: "var(--text-secondary)" }}>
               <p>&copy; 2026 VidFlow. Built for the future of creativity.</p>
+              <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "2rem", fontSize: "0.9rem" }}>
+                <a href="/terms" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Terms and Conditions</a>
+                <a href="/privacy" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Privacy Policy</a>
+              </div>
           </footer>
         </body>
       </html>
